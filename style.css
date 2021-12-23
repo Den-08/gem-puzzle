@@ -1,0 +1,67 @@
+body {
+  margin: 0;
+}
+
+.title {
+  text-align: center;
+  width: 320px;
+  margin: 1rem auto;
+}
+
+.timeMoves {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  width: 320px;
+  margin: 1rem auto;
+}
+
+.gameField {
+  margin: 0 auto;
+  width: 320px;
+  height: 320px;
+  border: 1px solid black;
+  border-radius: 5px;
+  position: relative;
+}
+
+.cell {
+  box-sizing: border-box;
+  width: 80px;
+  height: 80px;
+  border: 3px solid black;
+  border-radius: 5px;
+  position: absolute;
+  transition: all 0.3s;
+  background-color: darkorange;
+  background-size: cover;
+
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 2rem;
+  text-shadow: -0.1rem -0.1rem 0.2rem white, 0.1rem 0.1rem 0.2rem white, 0 0 1em white, 0 0 0.2em white;
+}
+
+.cell__finish {
+  color: rgba(0, 0, 0, 0);
+  text-shadow: unset;
+}
+
+h2 {
+  text-align: center;
+}
+
+.winButton {
+  width: 320px;
+  padding: 0 80px;
+  display: block;
+  margin: 1rem auto;
+
+  font-size: 1.6rem;
+}
+
+@media (max-width: 700px) {}
