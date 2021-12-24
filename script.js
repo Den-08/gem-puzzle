@@ -86,8 +86,7 @@ function newGame() {
       const cell = document.createElement('div');
       const value = numbers[i - 1] + 1;
       cell.className = 'cell';
-      cell.innerHTML = value;    
-      cell.style.backgroundImage="url('img/" + countElem + '/' + value + ".jpg')";   // Images as background
+      cell.innerHTML = value;      
 
       const left = i % countElem;
       const top = (i - left) / countElem;
@@ -98,30 +97,25 @@ function newGame() {
          top: top,
          element: cell
       });
-   };
-
-   // проверка на решаемость 
-   let testToWinFlag = 0;
-   for (let i = 1; i <= numberOfcells - 1; i += 1) {
-         j = i + 1;         
-         if (cellArray[i].value > cellArray[j].value) { 
-            testToWinFlag += 1;
-         };
-   };
+   };   
 
    // замена при необходимости элементов
-   if (testToWinFlag % 2 === 0) {
+   if (testToWin(numberOfcells)) {
       let tempValue = cellArray[1].value;
       cellArray[1].value = cellArray[2].value;
       cellArray[2].value = tempValue;
    };
+
+   //console.log('дополнительная проверка');
+   testToWin(numberOfcells);
    
    // отрисовка пазлов и обработка кликов по ним
    for (let i = 1; i <= numberOfcells; i += 1) {
       cell = cellArray[i].element; 
       cell.innerHTML = cellArray[i].value;
       cell.style.left = `${cellArray[i].left * cellSize}px`;
-      cell.style.top = `${cellArray[i].top * cellSize}px`; 
+      cell.style.top = `${cellArray[i].top * cellSize}px`;
+      cell.style.backgroundImage="url('img/" + countElem + '/' + cellArray[i].value + ".jpg')";   // Images as background
       gameField.append(cell);
       cell.addEventListener('click', () => {
          cellMove(i);
@@ -210,6 +204,21 @@ function finish() {
       numberOfcells = countElem * countElem - 1;
       newGame();
    });
+};
+
+// проверка на решаемость
+function testToWin(numberOfcells) { 
+   let testToWinFlag = 1;
+   for (let i = 1; i < numberOfcells; i++) {
+      for (let j = i + 1; j <= numberOfcells ; j++) {                 
+         if (cellArray[i].value > cellArray[j].value) { 
+            testToWinFlag += 1;
+         };
+         //console.log(`${cellArray[i].value} > ${cellArray[j].value} testToWinFlag = ${testToWinFlag}`);
+      };
+   };
+   //console.log(!(testToWinFlag % 2));
+   return !(testToWinFlag % 2);
 };
 
 // ===Run===
