@@ -8,6 +8,12 @@ body {
   margin: 1rem auto;
 }
 
+.subtitle {
+  text-align: center;
+  width: 320px;
+  margin: 0 auto;
+}
+
 .timeMoves {
   display: flex;
   justify-content: space-between;

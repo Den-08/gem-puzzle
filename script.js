@@ -24,7 +24,7 @@ function newGame() {
    min = 0;
    sec = 0;
    moveCounter = 0;
-   document.body.innerHTML = '<h1 class="title">Собери пазл!</h1>';
+   document.body.innerHTML = '<h1 class="title">Игра "Собери пазл!"</h1><p class="subtitle">Важно: пустая ячейка должна остаться в верхнем левом углу.</p>';
 
    timeMoves = document.createElement('div');
    timeMoves.className = 'timeMoves';
