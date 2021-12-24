@@ -44,11 +44,6 @@ function newGame() {
                              <option ${countElem == 5 ? 'selected=true' : ''}>5</option>
                              <option ${countElem == 6 ? 'selected=true' : ''}>6</option>
                             `;
-//  countElemDiv.addEventListener("change", () => {
-//    countElem = document.getElementById('countElemDiv').options[document.getElementById('countElemDiv').options.selectedIndex].text;
-//    numberOfcells = countElem * countElem - 1;
-//    newGame();
-//  });
 
    timeMoves.append(countElemDiv);
 
@@ -103,16 +98,36 @@ function newGame() {
          top: top,
          element: cell
       });
+   };
 
-   cell.style.left = `${left * cellSize}px`;
-   cell.style.top = `${top * cellSize}px`;
+   // проверка на решаемость 
+   let testToWinFlag = 0;
+   for (let i = 1; i <= numberOfcells - 1; i += 1) {
+         j = i + 1;         
+         if (cellArray[i].value > cellArray[j].value) { 
+            testToWinFlag += 1;
+         };
+   };
 
-   gameField.append(cell);
-
-   cell.addEventListener('click', () => {
+   // замена при необходимости элементов
+   if (testToWinFlag % 2 === 0) {
+      let tempValue = cellArray[1].value;
+      cellArray[1].value = cellArray[2].value;
+      cellArray[2].value = tempValue;
+   };
+   
+   // отрисовка пазлов и обработка кликов по ним
+   for (let i = 1; i <= numberOfcells; i += 1) {
+      cell = cellArray[i].element; 
+      cell.innerHTML = cellArray[i].value;
+      cell.style.left = `${cellArray[i].left * cellSize}px`;
+      cell.style.top = `${cellArray[i].top * cellSize}px`; 
+      gameField.append(cell);
+      cell.addEventListener('click', () => {
          cellMove(i);
       });
    };
+ 
 };
 
 function randomField(n) {
